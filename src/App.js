@@ -215,7 +215,7 @@ function App() {
         </div>
         <div ref={divRef} className='z-10 flex-1 text-center bg-green-400 w-full'>
           <button onClick={startToggle} className='bg-red-400 mt-10 w-fit text-white p-3 rounded-xl font-extrabold mx-auto'>Start Game</button>
-          <p className='text-6xl font-extrabold text-yellow-300 '>Flappy {isMobile? "mobile" : "pc"}</p>
+          <p className='text-6xl font-extrabold text-yellow-300 '>Flappy bird</p>
         </div>
       </div>
     </div>
