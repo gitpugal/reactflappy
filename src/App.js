@@ -13,7 +13,6 @@ function App() {
   const highScore = localStorage.getItem("flappyhighscore");
   const divRef = useRef(null);
   const birdRef = useRef(null);
-
   const [isGameStarted, setIsGameStarted] = useState(false);
   const [top, setTop] = useState(300);
   const [score, setScore] = useState(0);
@@ -25,7 +24,7 @@ function App() {
   const [rotation, setRotation] = useState(0);
   const [isJumped, setIsJumped] = useState(false);
   const [isGameOver, setisGameOver] = useState(false);
-  const [screenHeight, setScreenHeight] = useState(isMobile ? "220" : "160")
+  const [screenHeight, setScreenHeight] = useState("160")
 
   function handleGameOver() {
     const playAudio = () => {
@@ -67,15 +66,15 @@ function App() {
 
 
         if ((top >= 0 && top <= screenHeight) &&
-          (xaxis <= 225.5 && xaxis >= 185.5)) {
+          (xaxis <= 207 && xaxis >= 167)) {
           handleGameOver();
           setIsGameStarted(false);
           setisGameOver(true);
           setTop(100);
         }
 
-        if ((top >= rect.top - screenHeight && top <= rect.top) &&
-          (xaxis <= 225.5 && xaxis >= 185.5)) {
+        if ((top >= rect.top-30 - screenHeight && top <= rect.top-20) &&
+          (xaxis <= 207 && xaxis >= 167)) {
           handleGameOver();
           setIsGameStarted(false);
 
@@ -84,7 +83,7 @@ function App() {
         }
 
         if ((top >= 0 && top <= screenHeight) &&
-          (x2axis <= 225.5 && x2axis >= 185.5)) {
+          (x2axis <= 207 && x2axis >= 167)) {
           handleGameOver();
           setIsGameStarted(false);
 
@@ -92,8 +91,8 @@ function App() {
           setTop(100);
         }
 
-        if ((top >= rect.top - screenHeight && top <= rect.top) &&
-          (x2axis <= 225.5 && x2axis >= 185.5)) {
+        if ((top >= rect.top-30 - screenHeight && top <= rect.top-20) &&
+          (x2axis <= 207 && x2axis >= 167)) {
           handleGameOver();
           setIsGameStarted(false);
 
@@ -101,7 +100,7 @@ function App() {
           setTop(100);
         }
         if ((top >= 0 && top <= screenHeight) &&
-          (x3axis <= 225.5 && x3axis >= 185.5)) {
+          (x3axis <= 207 && x3axis >= 167)) {
           handleGameOver();
           setIsGameStarted(false);
 
@@ -109,8 +108,8 @@ function App() {
           setTop(100);
         }
 
-        if ((top >= rect.top - screenHeight && top <= rect.top) &&
-          (x3axis <= 225.5 && x3axis >= 185.5)) {
+        if ((top >= rect.top-30 - screenHeight && top <= rect.top-20) &&
+          (x3axis <= 207 && x3axis >= 167)) {
           handleGameOver();
           setIsGameStarted(false);
 
@@ -173,13 +172,13 @@ function App() {
   }
   useEffect(() => {
     const timeout = setTimeout(() => {
-      setRotation(90)
+      setRotation(45)
 
     }, 250);
 
     return () => {
       clearTimeout(timeout);
-      setRotation(-45);
+      setRotation(-100);
     };
   }, [isJumped]);
 
@@ -193,7 +192,7 @@ function App() {
 
   return (
     <div onClick={jump} className="App bg-gray-700  items-center w-screen overflow-hidden  h-screen flex flex-col">
-      <div className='w-screen lg:w-[30%] flex flex-col overflow-hidden bg-teal-300 h-screen'>
+      <div className='w-[350px] lg:w-[30%] flex flex-col overflow-hidden bg-teal-300 h-[896px]'>
         <div className='flex-[2.5] relative  flex-col w-full bg-blue-400 '>
           <img src={mountain} className='h-[90%] absolute bottom-[-26%]' alt="" />
           <p className='absolute text-white bg-red-400 rounded-xl p-2 top-20 font-bold left-1/4 text-5xl w-fit -z-0'>Score: {Math.floor(score)}</p>
@@ -207,16 +206,16 @@ function App() {
           </div>
           
           {!isGameStarted && <p className={`absolute mt-52 ml-32 text-3xl w-50 font-extrabold text-red-500`}>Tap to play!</p>}
-          <PillarBar toporbottom={"bottom-[-20px]"} xaxis={xaxis} height={isMobile ?  "220" : "160"} />
-          <PillarBar toporbottom={"top-0"} xaxis={xaxis} height={isMobile ?  "220" : "160"} />
-          <PillarBar toporbottom={"bottom-[-20px]"} xaxis={x2axis} height={isMobile ?  "220" : "160"} />
-          <PillarBar toporbottom={"top-0"} xaxis={x2axis} height={isMobile ?  "220" : "160"} />
-          <PillarBar toporbottom={"bottom-[-20px]"} xaxis={x3axis} height={isMobile ?  "220" : "160"} />
-          <PillarBar toporbottom={"top-0"} xaxis={x3axis} height={isMobile ?  "220" : "160"} />
+          <PillarBar  toporbottom={"bottom-0"} xaxis={xaxis} />
+          <PillarBar toporbottom={"top-0"} xaxis={xaxis} />
+          <PillarBar toporbottom={"bottom-0"} xaxis={x2axis} />
+          <PillarBar toporbottom={"top-0"} xaxis={x2axis} />
+          <PillarBar toporbottom={"bottom-0"} xaxis={x3axis} />
+          <PillarBar toporbottom={"top-0"} xaxis={x3axis} />
         </div>
         <div ref={divRef} className='z-10 flex-1 text-center bg-green-400 w-full'>
           <button onClick={startToggle} className='bg-red-400 mt-10 w-fit text-white p-3 rounded-xl font-extrabold mx-auto'>Start Game</button>
-          <p className='text-6xl font-extrabold text-yellow-300 '>Flappy Bird</p>
+          <p className='text-6xl font-extrabold text-yellow-300 '>Flappy {isMobile? "mobile" : "pc"}</p>
         </div>
       </div>
     </div>
